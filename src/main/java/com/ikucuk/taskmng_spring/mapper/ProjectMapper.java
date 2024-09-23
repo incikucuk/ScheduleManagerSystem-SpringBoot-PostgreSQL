@@ -12,7 +12,8 @@ public class ProjectMapper {
                 project.getDescription(),
                 project.getStartDate(),
                 project.getEndDate(),
-                project.getStatus()
+                project.getStatus(),
+                project.getTasks()
         );
     }
 
@@ -23,7 +24,9 @@ public class ProjectMapper {
                 projectDto.getDescription(),
                 projectDto.getStartDate(),
                 projectDto.getEndDate(),
-                projectDto.getStatus()
+                projectDto.getStatus(),
+                projectDto.getTasks()
+
         );
     }
 }

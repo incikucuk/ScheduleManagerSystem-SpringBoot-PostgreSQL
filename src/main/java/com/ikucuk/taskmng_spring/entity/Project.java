@@ -10,7 +10,9 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -42,5 +44,8 @@ public class Project {
     @Column(name = "project_status")
     private Status status;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    private List<Task> tasks = new ArrayList<>();
 
 }

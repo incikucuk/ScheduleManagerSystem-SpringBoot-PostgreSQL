@@ -1,5 +1,6 @@
 package com.ikucuk.taskmng_spring.dto;
 
+import com.ikucuk.taskmng_spring.entity.Task;
 import com.ikucuk.taskmng_spring.enums.Status;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,5 +28,7 @@ public class ProjectDto {
     private LocalDate endDate;
 
     private Status status;
+
+    private List<Task> tasks;
 
 }
