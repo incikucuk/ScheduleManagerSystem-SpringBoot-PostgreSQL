@@ -1,7 +1,11 @@
 package com.ikucuk.taskmng_spring.dto;
 
+import com.ikucuk.taskmng_spring.entity.Task;
 import com.ikucuk.taskmng_spring.enums.Status;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Getter
@@ -16,4 +20,5 @@ public class TaskDto {
     private String assignedTo;
     private Status status;
     private Integer projectId;
+    private Integer employeeId;
 }

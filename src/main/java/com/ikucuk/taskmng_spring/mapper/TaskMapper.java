@@ -14,7 +14,8 @@ public class TaskMapper {
                 task.getDescription(),
                 task.getAssignedTo(),
                 task.getStatus(),
-                task.getProjectId()
+                task.getProjectId(),
+                task.getEmployeeId()
         );
     }
 
@@ -25,7 +26,8 @@ public class TaskMapper {
                 taskDto.getDescription(),
                 taskDto.getAssignedTo(),
                 taskDto.getStatus(),
-                taskDto.getProjectId()
+                taskDto.getProjectId(),
+                taskDto.getEmployeeId()
         );
     }
 }

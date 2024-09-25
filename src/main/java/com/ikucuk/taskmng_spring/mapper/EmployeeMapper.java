@@ -9,7 +9,9 @@ public class EmployeeMapper {
         return new EmployeeDto(
                 employee.getId(),
                 employee.getName(),
-                employee.getEmail()
+                employee.getEmail(),
+                employee.getTasksOfEmployee(),
+                employee.getProjectList()
         );
     }
 
@@ -17,7 +19,9 @@ public class EmployeeMapper {
         return new Employee(
                 employeeDto.getId(),
                 employeeDto.getName(),
-                employeeDto.getEmail()
+                employeeDto.getEmail(),
+                employeeDto.getTasksOfEmployee(),
+                employeeDto.getProjectList()
         );
     }
 }

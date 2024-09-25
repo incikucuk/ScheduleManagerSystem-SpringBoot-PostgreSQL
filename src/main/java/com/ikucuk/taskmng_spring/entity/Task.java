@@ -32,4 +32,7 @@ public class Task {
     @Column(name = "project_id")
     private Integer projectId;
 
+    @Column(name = "employee_id")
+    private Integer employeeId;
+
 }

@@ -1,15 +1,20 @@
 package com.ikucuk.taskmng_spring.service.impl;
 
 import com.ikucuk.taskmng_spring.dto.ProjectDto;
+import com.ikucuk.taskmng_spring.dto.TaskDto;
 import com.ikucuk.taskmng_spring.entity.Project;
+import com.ikucuk.taskmng_spring.entity.Task;
 import com.ikucuk.taskmng_spring.exception.ResourceNotFoundException;
 import com.ikucuk.taskmng_spring.mapper.ProjectMapper;
+import com.ikucuk.taskmng_spring.mapper.TaskMapper;
 import com.ikucuk.taskmng_spring.repository.ProjectRepository;
+import com.ikucuk.taskmng_spring.repository.TaskRepository;
 import com.ikucuk.taskmng_spring.service.ProjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +22,7 @@ import java.util.stream.Collectors;
 public class ProjectServiceImpl implements ProjectService {
 
     ProjectRepository projectRepository;
+    TaskRepository taskRepository;
 
     @Override
     public ProjectDto createProject(ProjectDto projectDto) {
@@ -63,4 +69,22 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.deleteById(id);
     }
 
+    @Override
+    public List<TaskDto> getTasksByProjectId(Long id) {
+        Project project = projectRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Project not found with given id: " + id));
+        List<Task> taskList = project.getTasks();
+        return taskList.stream().map(
+                (task) -> TaskMapper.mapToTaskDto(task)).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public TaskDto createTaskByProjectId(Long id, TaskDto taskDto) {
+        Project project = projectRepository.findById(id).orElseThrow(() ->
+                new RuntimeException("Project not found with given id: " + id));
+        Task task = TaskMapper.mapToTasktEntity(taskDto);
+        Task savedTask = taskRepository.save(task);
+        return TaskMapper.mapToTaskDto(savedTask);
+    }
 }

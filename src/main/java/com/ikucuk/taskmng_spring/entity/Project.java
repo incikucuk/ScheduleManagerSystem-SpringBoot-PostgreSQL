@@ -1,14 +1,15 @@
 package com.ikucuk.taskmng_spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ikucuk.taskmng_spring.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.lang.reflect.Member;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,8 +22,6 @@ import java.util.List;
 @Entity
 @Table(name = "projects")
 public class Project {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,5 +46,9 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     private List<Task> tasks = new ArrayList<>();
+
+    @JsonIgnore
+    @ManyToMany
+    private List<Employee> employeeList = new ArrayList<>();
 
 }

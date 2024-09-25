@@ -1,6 +1,8 @@
 package com.ikucuk.taskmng_spring.controller;
 
 import com.ikucuk.taskmng_spring.dto.EmployeeDto;
+import com.ikucuk.taskmng_spring.entity.Employee;
+import com.ikucuk.taskmng_spring.mapper.EmployeeMapper;
 import com.ikucuk.taskmng_spring.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,16 @@ public class EmployeeController {
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id){
         employeeService.deleteEmployeeById(id);
         return ResponseEntity.ok("Employee deleted successfully!");
+    }
+
+    //@ManyToMany relation durumunu incelemek icin ek olarak yazdim
+    @PostMapping("/{id}/projects")
+    public ResponseEntity<EmployeeDto> assignedProjectToEmployee(
+            @PathVariable("id") Long id,
+            @PathVariable("projectId") Long projectId
+    ){
+       EmployeeDto updatedEmployee =  employeeService.getAssignedProjectsToEmployee(id,projectId);
+        return new ResponseEntity<EmployeeDto>(updatedEmployee,HttpStatus.OK);
     }
 
 

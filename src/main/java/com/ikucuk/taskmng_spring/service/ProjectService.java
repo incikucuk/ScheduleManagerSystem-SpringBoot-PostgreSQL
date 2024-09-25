@@ -1,6 +1,7 @@
 package com.ikucuk.taskmng_spring.service;
 
 import com.ikucuk.taskmng_spring.dto.ProjectDto;
+import com.ikucuk.taskmng_spring.dto.TaskDto;
 import com.ikucuk.taskmng_spring.entity.Project;
 
 import java.util.List;
@@ -15,4 +16,9 @@ public interface ProjectService {
     ProjectDto updateProject(Long projectId, ProjectDto projectDto);
 
     void deleteProject(Long id);
+
+
+    List<TaskDto> getTasksByProjectId(Long id);
+
+    TaskDto createTaskByProjectId(Long id, TaskDto taskDto);
 }

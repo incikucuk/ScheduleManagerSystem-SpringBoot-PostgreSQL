@@ -1,7 +1,9 @@
 package com.ikucuk.taskmng_spring.controller;
 
 import com.ikucuk.taskmng_spring.dto.ProjectDto;
+import com.ikucuk.taskmng_spring.dto.TaskDto;
 import com.ikucuk.taskmng_spring.service.ProjectService;
+import com.ikucuk.taskmng_spring.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ public class ProjectController {
 
     @Autowired
     private ProjectService projectService;
+    private TaskService taskService;
 
     @PostMapping
     public ResponseEntity<ProjectDto> saveProject(@RequestBody ProjectDto projectDto){
@@ -42,4 +45,20 @@ public class ProjectController {
         projectService.deleteProject(id);
         return ResponseEntity.ok("Project Deleted Sucessfully!");
     }
+
+    //projenin gorevlerini listele
+    @GetMapping("{id}/tasks")
+    public ResponseEntity<List<TaskDto>> getTasksProject(@PathVariable("id") Long id){
+        return new ResponseEntity<>(projectService.getTasksByProjectId(id), HttpStatus.OK);
+    }
+
+
+    //belirli bir projeye yeni görev ekle
+    @PostMapping("{id}/tasks")
+    public ResponseEntity<TaskDto> createTaskWitByProjectId(@PathVariable Long id,@RequestBody TaskDto taskDto){
+        return new ResponseEntity<>(projectService.createTaskByProjectId(id,taskDto), HttpStatus.CREATED);
+    }
+
+
+
 }
