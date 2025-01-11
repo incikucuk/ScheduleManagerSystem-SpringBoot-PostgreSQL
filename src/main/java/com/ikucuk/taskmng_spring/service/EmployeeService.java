@@ -8,13 +8,13 @@ public interface EmployeeService {
 
     EmployeeDto createEmployee(EmployeeDto employeeDto);
 
-    EmployeeDto getEmployeeById(Long id);
+    EmployeeDto getEmployeeById(String id);
 
     List<EmployeeDto> getAllEmployees();
 
-    EmployeeDto updateEmployee(Long id,EmployeeDto employeeDto);
+    EmployeeDto updateEmployee(String id,EmployeeDto employeeDto);
 
-    void deleteEmployeeById(Long id);
+    void deleteEmployeeById(String id);
 
-    EmployeeDto getAssignedProjectsToEmployee(Long employeeId, Long projectId);
+    EmployeeDto getAssignedProjectsToEmployee(String employeeId, String projectId);
 }

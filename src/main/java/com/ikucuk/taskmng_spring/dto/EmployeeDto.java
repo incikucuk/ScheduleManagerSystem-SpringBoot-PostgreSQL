@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 public class EmployeeDto {
 
-    private Long id;
+    private String id;
     private String name;
     private String email;
     private List<Task> tasksOfEmployee;

@@ -9,16 +9,17 @@ import java.util.List;
 public interface ProjectService {
     ProjectDto createProject(ProjectDto projectDto);
 
-    ProjectDto getProjectById(Long projectId);
+    ProjectDto getProjectById(String projectId);
 
     List<ProjectDto> getAllProjects();
 
-    ProjectDto updateProject(Long projectId, ProjectDto projectDto);
+    ProjectDto updateProject(String projectId, ProjectDto projectDto);
 
-    void deleteProject(Long id);
+    void deleteProject(String id);
 
 
-    List<TaskDto> getTasksByProjectId(Long id);
+    List<TaskDto> getTasksByProjectId(String id);
 
-    TaskDto createTaskByProjectId(Long id, TaskDto taskDto);
+    TaskDto createTaskByProjectId(String id, TaskDto taskDto);
+
 }

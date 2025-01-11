@@ -25,7 +25,7 @@ public class ProjectController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProjectDto> getProjectById(@PathVariable("id") Long projectId){
+    public ResponseEntity<ProjectDto> getProjectById(@PathVariable("id") String projectId){
         return new ResponseEntity<>(projectService.getProjectById(projectId),HttpStatus.OK);
     }
 
@@ -35,27 +35,27 @@ public class ProjectController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ProjectDto> updateProject(@PathVariable("id") Long id, @RequestBody ProjectDto projectDto){
+    public ResponseEntity<ProjectDto> updateProject(@PathVariable("id") String id, @RequestBody ProjectDto projectDto){
        ProjectDto updatedProject =  projectService.updateProject(id,projectDto);
         return new ResponseEntity<>(updatedProject,HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteProjectById(@PathVariable Long id){
+    public ResponseEntity<String> deleteProjectById(@PathVariable String id){
         projectService.deleteProject(id);
         return ResponseEntity.ok("Project Deleted Sucessfully!");
     }
 
     //projenin gorevlerini listele
     @GetMapping("{id}/tasks")
-    public ResponseEntity<List<TaskDto>> getTasksProject(@PathVariable("id") Long id){
+    public ResponseEntity<List<TaskDto>> getTasksProject(@PathVariable("id") String id){
         return new ResponseEntity<>(projectService.getTasksByProjectId(id), HttpStatus.OK);
     }
 
 
     //belirli bir projeye yeni görev ekle
     @PostMapping("{id}/tasks")
-    public ResponseEntity<TaskDto> createTaskWitByProjectId(@PathVariable Long id,@RequestBody TaskDto taskDto){
+    public ResponseEntity<TaskDto> createTaskWitByProjectId(@PathVariable String id,@RequestBody TaskDto taskDto){
         return new ResponseEntity<>(projectService.createTaskByProjectId(id,taskDto), HttpStatus.CREATED);
     }
 

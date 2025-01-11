@@ -23,18 +23,18 @@ public class TaskController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<TaskDto> updateTask(@PathVariable("id") Long id, @RequestBody TaskDto taskDto){
+    public ResponseEntity<TaskDto> updateTask(@PathVariable("id") String id, @RequestBody TaskDto taskDto){
         return new ResponseEntity<>(taskService.updateTask(id,taskDto), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteTaskById(@PathVariable("id") Long id){
+    public ResponseEntity<String> deleteTaskById(@PathVariable("id") String id){
         taskService.deleteTask(id);
         return ResponseEntity.ok("Task Deleted sucessfully");
     }
 
     @PostMapping("{id}/complete")
-    public ResponseEntity<String> isCompleted(@PathVariable("id") Long id){
+    public ResponseEntity<String> isCompleted(@PathVariable("id") String id){
         taskService.isCompleted(id);
         return ResponseEntity.ok("Task Completed");
 

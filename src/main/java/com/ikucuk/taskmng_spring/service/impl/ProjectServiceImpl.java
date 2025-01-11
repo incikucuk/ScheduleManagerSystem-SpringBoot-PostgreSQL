@@ -33,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDto getProjectById(Long projectId) {
+    public ProjectDto getProjectById(String projectId) {
       Project project =  projectRepository.findById(projectId).orElseThrow(() ->
               new RuntimeException("Project not found with given id: " + projectId));
        return ProjectMapper.mapToProjectDto(project);
@@ -48,7 +48,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public ProjectDto updateProject(Long projectId, ProjectDto projectDto) {
+    public ProjectDto updateProject(String projectId, ProjectDto projectDto) {
        Project project =  projectRepository.findById(projectId).
                orElseThrow(() -> new ResourceNotFoundException("Project Not Found with Project id: " +projectId));
 
@@ -64,13 +64,13 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void deleteProject(Long id) {
+    public void deleteProject(String id) {
         Project project = projectRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Project not found" + id));
         projectRepository.deleteById(id);
     }
 
     @Override
-    public List<TaskDto> getTasksByProjectId(Long id) {
+    public List<TaskDto> getTasksByProjectId(String id) {
         Project project = projectRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Project not found with given id: " + id));
         List<Task> taskList = project.getTasks();
@@ -80,7 +80,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public TaskDto createTaskByProjectId(Long id, TaskDto taskDto) {
+    public TaskDto createTaskByProjectId(String id, TaskDto taskDto) {
         Project project = projectRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Project not found with given id: " + id));
         Task task = TaskMapper.mapToTasktEntity(taskDto);

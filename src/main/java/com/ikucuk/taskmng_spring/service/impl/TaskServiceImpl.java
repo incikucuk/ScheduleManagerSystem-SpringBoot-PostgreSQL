@@ -33,7 +33,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public TaskDto updateTask(Long id, TaskDto taskDto) {
+    public TaskDto updateTask(String id, TaskDto taskDto) {
         Task task = taskRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Task not found with given id: " + id));
         task.setName(taskDto.getName());
@@ -46,14 +46,14 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void deleteTask(Long id) {
+    public void deleteTask(String id) {
         Task task = taskRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Task not found with given id: " + id));
         taskRepository.delete(task);
     }
 
     @Override
-    public void isCompleted(Long id) {
+    public void isCompleted(String id) {
         Task task = taskRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("Task not found with given id: " + id));
 

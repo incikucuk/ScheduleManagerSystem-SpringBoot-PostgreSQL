@@ -8,10 +8,10 @@ public interface TaskService {
 
     TaskDto createTask(TaskDto taskdto);
 
-    TaskDto updateTask(Long id, TaskDto taskDto);
+    TaskDto updateTask(String id, TaskDto taskDto);
 
-    void deleteTask(Long id);
+    void deleteTask(String id);
 
-    void isCompleted(Long id);
+    void isCompleted(String id);
 
 }

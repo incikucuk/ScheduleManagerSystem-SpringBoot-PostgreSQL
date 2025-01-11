@@ -12,7 +12,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,7 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto getEmployeeById(Long id) {
+    public EmployeeDto getEmployeeById(String id) {
        Employee employee = employeeRepository.findById(id).orElseThrow(() ->
                new ResourceNotFoundException("Employee not found with given id: "+id));
         return EmployeeMapper.mapToEmployeeDto(employee);
@@ -46,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public EmployeeDto updateEmployee(Long id, EmployeeDto employeeDto) {
+    public EmployeeDto updateEmployee(String id, EmployeeDto employeeDto) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Employee not found with given id: "+id));
         employee.setName(employeeDto.getName());
@@ -56,18 +55,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployeeById(Long id) {
+    public void deleteEmployeeById(String id) {
         Employee employee = employeeRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Employee not found with given id: "+id));
         employeeRepository.deleteById(id);
     }
 
     @Override
-    public EmployeeDto getAssignedProjectsToEmployee(Long employeeId, Long projectId) {
+    public EmployeeDto getAssignedProjectsToEmployee(String employeeId, String projectId) {
         List<Project> projectList = null;
-        Project project = projectRepository.findById(projectId).orElseThrow(() ->
+        Project project = projectRepository.findById(employeeId).orElseThrow(() ->
                 new ResourceNotFoundException("projectId not found with given id: "+ projectId));
-        Employee employee = employeeRepository.findById(employeeId).orElseThrow(() ->
+        Employee employee = employeeRepository.findById(projectId).orElseThrow(() ->
                 new ResourceNotFoundException("employeeId not found with given id: "+employeeId));
 
         projectList.add(project);
@@ -75,6 +74,5 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee savedEmployee = employeeRepository.save(employee);
         return EmployeeMapper.mapToEmployeeDto(savedEmployee);
     }
-
 
 }
